@@ -1,0 +1,17 @@
+{
+    "name": "hexmodr/chronicle",
+    "description": "Chronicle is a database abstraction system similar to ActiveRecord",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Henry Morgan",
+            "email": "henry@cd2solutions.co.uk"
+        }
+    ],
+    "require": {},
+    "autoload": {
+      "psr-4": {
+        "Chronicle\\Connection\\": "src/connection"
+      }
+    }
+}
