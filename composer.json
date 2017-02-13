@@ -10,6 +10,7 @@
     ],
     "require": {},
     "autoload": {
+      "files": ["src/base.php"],
       "psr-4": {
         "Chronicle\\Connection\\": "src/connection"
       }
