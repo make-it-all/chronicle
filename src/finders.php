@@ -10,12 +10,10 @@ trait Finders {
   }
 
   public static function first() {
-    // TODO: implement
     return static::all()->first();
   }
 
   public static function last() {
-    // TODO: implement
     return static::all()->last();
   }
 
@@ -24,19 +22,16 @@ trait Finders {
   }
 
   public static function find_by($attrs) {
-
+    // TODO: implement
     $query = new Query\Select(get_called_class());
     $query->where('id = 2')->limit(1)->order('created_at asc');
-
-    echo $query->toSQL();
-    exit();
     return $query->first();
 
   }
 
 }
 
-// 
+//
 //
 // User::where(['email'=>'henry@gmail.com', 'password'=>'pass123'])->order('created_at asc');
 // User::first(20)->joins('calls')

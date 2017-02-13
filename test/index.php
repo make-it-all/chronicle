@@ -1,7 +1,6 @@
 <?php
 
 require __DIR__.'/../vendor/autoload.php';
-require __DIR__.'/../src/base.php';
 
 Chronicle\Base::setup_connection([
   'driver'   => 'mysql',
@@ -18,6 +17,10 @@ class User extends Chronicle\Base {
 
 }
 
-
-print_r(new User);
+$users = User::all();
+$users->load();
+foreach ($users as $user) {
+  var_dump($user);
+  echo '<BR>';
+}
 // print_r(Chronicle\Base::connection()->columns('users'));

@@ -1,6 +1,6 @@
 <?php namespace Chronicle;
 
-class RecordArray implements \ArrayAccess {
+class RecordArray implements \ArrayAccess, \Iterator {
 
   private $_ids;
   private $_records;
@@ -86,14 +86,14 @@ class RecordArray implements \ArrayAccess {
     return end($records);
   }
 
+
+  //----- ArrayAccess - Methods
   public function offsetExists($key) {
     return isset($this->records()[$key]);
   }
-
   public function offsetUnset($key) {
     unset($this->records()[$key]);
   }
-
   public function offsetSet($key, $value) {
     if (is_null($key)) {
       $this->records()[] = $value;
@@ -101,9 +101,30 @@ class RecordArray implements \ArrayAccess {
       $this->records()[$key] = $value;
     }
   }
-
   public function offsetGet($key) {
     return isset($this->records()[$key]) ? $this->records()[$key] : null;
+  }
+
+  //----- Iterator - Methods
+  public function current(){
+    $this->load();
+    return current($this->_records);
+  }
+  public function next() {
+    $this->load();
+    return next($this->_records);
+  }
+  public function key() {
+    $this->load();
+    return key($this->_records);
+  }
+  public function valid() {
+    $this->load();
+    return $this->offsetExists($this->key());
+  }
+  public function rewind() {
+    $this->load();
+    return reset($this->_records);
   }
 
 }
