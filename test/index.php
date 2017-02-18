@@ -39,10 +39,18 @@ class User extends Chronicle\Base {
 
 }
 
-$attribute = User::last()->get_attribute('is_operator');
-var_dump($attribute->column);
-var_dump(User::last()->get_attribute('is_operator'));
-//
+
+$users = User::all()->results();
+
+var_dump($users);
+foreach($users as $user) {
+  $name = $user->get_name();
+  echo "$name<br>";
+}
+
+
+
+
 // $user = User::new();
 // $user->set_name('Henry Morgan');
 // $user->set_email('hexmodr@gmail.com');

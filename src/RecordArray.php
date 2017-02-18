@@ -5,7 +5,7 @@ class RecordArray implements \ArrayAccess, \Iterator {
   private $_ids;
   private $_records;
   private $query;
-
+  private $loaded = false;
   public function __construct($class) {
     $this->class = $class;
     $this->table_name = $class::$table_name ?? null;
@@ -25,8 +25,9 @@ class RecordArray implements \ArrayAccess, \Iterator {
   }
 
   public function load() {
-    if (isset($this->query)) {
+    if ($this->loaded == false && isset($this->query)) {
       $this->from_pdo_results($this->query->execute());
+      $this->loaded = true;
     }
   }
 

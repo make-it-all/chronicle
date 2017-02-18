@@ -31,7 +31,7 @@ class Adapter {
   public function count($table_name) {
     $sql = "SELECT COUNT(*) FROM `$table_name`";
     $result = $this->execute($sql);
-    return $result->rowCount();
+    return $result->fetchColumn();
   }
   public function table_exists($table_name) {
     $sql = "SHOW TABLES LIKE '$table_name'";

@@ -7,7 +7,8 @@ class Select extends AbstractQuery {
   public $table_name;
 
   private $executed = false;
-  private $results;
+  private $query_results;
+  private $record_array;
 
   private $columns = [];
   private $order = [];
@@ -58,18 +59,18 @@ class Select extends AbstractQuery {
 
   public function execute() {
     if ($this->executed === false) {
-      $this->results = \Chronicle\Base::connection()->select($this->toSQL());
+      $this->query_results = \Chronicle\Base::connection()->select($this->toSQL());
       $this->executed = true;
     }
-    return $this->results;
+    return $this->query_results;
   }
 
   public function results() {
-    if ($this->results === null) {
-      $this->results = new \Chronicle\RecordArray($this->class);
-      $this->results->fromSQL($this);
+    if ($this->record_array === null) {
+      $this->record_array = new \Chronicle\RecordArray($this->class);
+      $this->record_array->fromSQL($this);
     }
-    return $this->results;
+    return $this->record_array;
   }
 
   public function __toString() {
@@ -83,4 +84,51 @@ class Select extends AbstractQuery {
   public function __debugInfo() {
     return ['sql' => $this->toSQL(), 'executed' => $this->executed];
   }
+
+
+    //
+    //
+    //
+    // //----- ArrayAccess - Methods
+    // public function offsetExists($key) {
+    //   return isset($this->results()[$key]);
+    // }
+    // public function offsetUnset($key) {
+    //   unset($this->results()[$key]);
+    // }
+    // public function offsetSet($key, $value) {
+    //   if (is_null($key)) {
+    //     $this->results()[] = $value;
+    //   } else {
+    //     $this->results()[$key] = $value;
+    //   }
+    // }
+    // public function offsetGet($key) {
+    //   return isset($this->results()[$key]) ? $this->results()[$key] : null;
+    // }
+    //
+    // //----- Iterator - Methods
+    // public function current(){
+    //   $this->results();
+    //   return current($this->record_array);
+    // }
+    // public function next() {
+    //   $this->results();
+    //   return next($this->record_array);
+    // }
+    // public function key() {
+    //   $this->results();
+    //   return key($this->record_array);
+    // }
+    // public function valid() {
+    //   $this->results();
+    //   return $this->offsetExists($this->key());
+    // }
+    // public function rewind() {
+    //   $this->results();
+    //   return reset($this->record_array);
+    // }
+
+
+
 }
