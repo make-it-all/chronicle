@@ -5,4 +5,8 @@ abstract class AbstractQuery {
   abstract public function execute();
   abstract public function toSQL();
 
+  protected function connection() {
+    return \Chronicle\Base::connection();
+  }
+
 }

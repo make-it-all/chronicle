@@ -4,50 +4,37 @@ class RecordArray implements \ArrayAccess, \Iterator {
 
   private $_ids;
   private $_records;
+  private $query;
 
   public function __construct($class) {
     $this->class = $class;
     $this->table_name = $class::$table_name ?? null;
-    $this->loaded = false;
-  }
-
-  public function from_attrs($attrs) {
-    $this->inflator = ['load_from_attrs', $attrs];
-  }
-
-  private function load_from_attrs($attrs) {
-    $this->_records = array_map(function($attrs) {
-      return new $this->class($attrs);
-    }, $attrs);
-  }
-
-  public function from_ids($ids) {
-    $this->_ids = $ids;
-    $this->inflator = ['load_from_ids', $ids];
-  }
-
-  private function load_from_ids($ids) {
-    $this->_records = array_map(function($id) {
-      return ($this->class)::find_by(['id'=>$id])->first();
-    }, $ids);
   }
 
   public function from_pdo_results($results) {
-    $this->inflator = ['load_from_pdo_results', $results];
-  }
-
-  private function load_from_pdo_results($results) {
     $this->_records = [];
     foreach($results as $result) {
-      $this->_records[] = new $this->class($result);
+      $record = $this->class::new_from_result($result);
+      $record->new_record = false;
+      $this->_records[] = $record;
+    }
+  }
+
+  public function fromSQL($query) {
+    $this->query = $query;
+  }
+
+  public function load() {
+    if (isset($this->query)) {
+      $this->from_pdo_results($this->query->execute());
     }
   }
 
   public function load_ids() {
     if ($this->_ids == null) {
       $this->_ids = array_map(function($rec){
-        return $rec->id;
-      }, $this->records);
+        return $rec->id();
+      }, $this->records());
     }
     return $this->_ids;
   }
@@ -56,34 +43,28 @@ class RecordArray implements \ArrayAccess, \Iterator {
     return $this->_ids ?? $this->load_ids();
   }
 
-  public function reload() {
-    $this->loaded = false;
-  }
-
-  public function load() {
-    if (!$this->loaded) {
-      $function = $this->inflator[0];
-      $args = array_slice($this->inflator, 1);
-      call_user_func_array([$this, $function], $args);
-      $this->loaded = true;
-    }
-  }
-
   public function records() {
     $this->load();
     return $this->_records;
   }
 
-
-
   public function first() {
     $records = $this->records();
-    return reset($records);
+    return $records[0] ?? null;
   }
 
   public function last() {
     $records = $this->records();
     return end($records);
+  }
+  public function count() {
+    return sizeof($this->records());
+  }
+  public function empty() {
+    return $this->count() == 0;
+  }
+  public function any() {
+    return !$this->empty();
   }
 
 
@@ -125,6 +106,16 @@ class RecordArray implements \ArrayAccess, \Iterator {
   public function rewind() {
     $this->load();
     return reset($this->_records);
+  }
+
+  public function __toString() {
+    $records = array_slice($this->records(), 0, 3);
+    $records_string = implode(', ', array_map(function($record){return (string)$record;}, $records));
+    if (sizeof($this->records()) > 3) {
+      $records_string.= '...';
+    }
+    $count = $this->count();
+    return "RecordArray($count $this->class){{$records_string}}";
   }
 
 }

@@ -4,18 +4,45 @@ class ColumnTypeUnknown extends \Exception {}
 
 class Column {
 
+  public $name, $native_type, $type, $default, $limit, $null, $primary;
+
   function __construct($name, $native_type=null, $default=null, $null=true) {
     $this->name = $name;
     $this->native_type = $native_type;
     $this->type = $this->convert_type($native_type);
-    $this->default = $this->cast_value($default);
+    $this->default = $this->cast_default_value($default);
     $this->limit = $this->get_limit();
     $this->null = $null;
     $this->primary = null;
 
   }
 
-  private function cast_value($value) {
+  private function convert_type($type) {
+    switch(true) {
+      case strrpos(strtolower($type), 'tinyint(1)') > -1:
+      return 'boolean';
+      case preg_match('/int/i', $type):
+      return 'integer';
+      case preg_match('/decimal|numeric|float|double/i', $type):
+      return 'float';
+      case preg_match('/datetime/i', $type):
+      return 'datetime';
+      case preg_match('/date/i', $type):
+      return 'date';
+      case preg_match('/timestamp/i', $type):
+      return 'timestamp';
+      case preg_match('/time/i', $type):
+      return 'time';
+      case preg_match('/text/i', $type):
+      return 'text';
+      case preg_match('/char/i', $type):
+      return 'string';
+      default:
+      throw new ColumnTypeUnknown;
+    }
+  }
+
+  public function cast_default_value($value) {
     if (is_null($value)) return null;
     switch($this->type) {
       case 'string':    return $value;
@@ -37,29 +64,43 @@ class Column {
     }
   }
 
-  private function convert_type($type) {
-    switch(true) {
-      case strrpos(strtolower($type), 'tinyint(1)') > -1:
-        return 'boolean';
-      case preg_match('/int/i', $type):
-        return 'integer';
-      case preg_match('/decimal|numeric|float|double/i', $type):
-        return 'float';
-      case preg_match('/datetime/i', $type):
-        return 'datetime';
-      case preg_match('/date/i', $type):
-        return 'date';
-      case preg_match('/timestamp/i', $type):
-        return 'timestamp';
-      case preg_match('/time/i', $type):
-        return 'time';
-      case preg_match('/text/i', $type):
-        return 'text';
-      case preg_match('/char/i', $type):
-        return 'string';
-      default:
-        throw new ColumnTypeUnknown;
-    }
+
+
+  // String
+  // Integer
+  // Float (floating point numbers - also called double)
+  // Boolean
+  // Array
+  // Object
+  // NULL
+  // Resource
+  public function cast_for_db($value) {
+    if (is_null($value)) { return null; }
+    $func_name = "cast_for_db_to_$this->type";
+    return $this->$func_name($value);
+  }
+  public function cast_for_db_to_string($value) {
+    if (is_bool($value)) { return ($value) ? '1' : '0'; }
+    if (is_numeric($value)) { return (string)$value; }
+    if (is_scalar($value)) { return (string)$value; }
+    if (is_object($value) && method_exists($value, '__toString')) { return (string)$value; }
+    if ($value instanceof \DateTime) { return $value->format('Y-m-d H:i:s'); }
+    return '';
+  }
+
+  public function cast_for_db_to_integer($value) {
+    if (is_bool($value)) { return ($value) ? '1' : '0'; }
+    if (is_numeric($value)) { return (string)(int)$value; }
+    return '0';
+  }
+
+  public function cast_for_db_to_boolean($value) {
+    return $this->value_to_boolean($value);
+  }
+
+  public function cast_for_db_to_datetime($value) {
+    if ($value instanceof \DateTime) { return $value->format('Y-m-d H:i:s'); }
+    return $value;
   }
 
   private static function string_to_time($time) {

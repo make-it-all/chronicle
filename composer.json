@@ -10,9 +10,12 @@
     ],
     "require": {},
     "autoload": {
-      "files": ["src/base.php"],
       "psr-4": {
-        "Chronicle\\Connection\\": "src/connection"
+        "Chronicle\\": "src",
+        "Chronicle\\Connection\\": "src/connection",
+        "Chronicle\\Validators\\": "src/validators",
+        "Chronicle\\Query\\": "src/query",
+        "Chronicle\\Query\\Parts\\": "src/query/parts"
       }
     }
 }
