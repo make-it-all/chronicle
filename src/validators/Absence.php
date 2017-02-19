@@ -4,7 +4,7 @@ class Absence extends AbstractValidator {
 
   public function execute() {
     if (!empty($this->attribute->get())) {
-      $this->record->errors()->add($this->attribute->name(), 'must be blank');
+      $this->record->errors()->add($this->attribute, 'must be blank');
     }
   }
 }

@@ -10,10 +10,11 @@ class Errors {
   }
 
   public function add($attribute, $message) {
-    if (!array_key_exists($attribute, $this->messages)) {
-      $this->messages[$attribute] = [];
+    $key = $attribute->name();
+    if (!array_key_exists($key, $this->messages)) {
+      $this->messages[$key] = [];
     }
-    $this->messages[$attribute][] = $message;
+    $this->messages[$key][] = $message;
   }
 
   public function messages() {
@@ -24,7 +25,8 @@ class Errors {
     $full_messages = [];
     foreach($this->messages as $attribute => $messages) {
       $full_messages = array_merge($full_messages, array_map(function($message) use ($attribute) {
-        return "$attribute $message";
+        $name = $attribute->human_name();
+        return "$name $message";
       }, $messages));
     }
     return $full_messages;
