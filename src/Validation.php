@@ -7,7 +7,6 @@ trait Validation {
   private $errors;
   private $validators;
 
-
   private function parse_validations() {
     if ($this->validators !== null) { return; }
     $this->validators = [];
@@ -51,6 +50,9 @@ trait Validation {
   }
 
   public function errors() {
+    if (is_null($this->errors)) {
+      $this->errors = new Errors($this);
+    }
     return $this->errors;
   }
 

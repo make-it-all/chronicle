@@ -33,14 +33,13 @@ class User extends Chronicle\Base {
   public static $table_name = 'users';
 
   public static $validations = [
-<<<<<<< HEAD
     'name' => ['presence'=>true],
     'email' => ['presence'=>true],
   ];
 
 }
 
-echo User::fifth();
+$user = User::fifth();
 //
 // foreach($users as $user) {
 //   echo $user;
@@ -50,25 +49,6 @@ echo User::fifth();
 
 //
 // $user = User::new(['name'=>'Henry Morgan', 'email'=>'henrys email']);
-=======
-    'name' => ['presence'=>true, 'exclusion'=>true, 'inclusion'=>true, 'length'=>true, 'absence'=>true, 'confirmation'=>true],
-    'email' => ['presence'=>true, 'uniquiness' =>true],
-    'is_lboro_admin' => ['acceptance'=>true],
-    'current_sign_in_at'=> ['length'=>true, 'numericality'=>true,],
-  ];
-
-}
-$user = User::new(['is_lboro_admin'=>'1', 'name'=>'Henry Morgan', 'current_sign_in_at'=>'0123456789']);
-// $user = User::new(['is_lboro_admin'=>'0', 'name'=>'Chris Head']);
-// $user = User::new(['is_lboro_admin'=>'0', 'name'=>'Zach Nurcombe']);
-//echo User::exists('is_lboro_admin > 0');
-var_dump($user->validate());
-var_dump($user->errors()->full_messages());
-
-//echo User::exists('id < 4');
-//var_dump(User::exists(['id' => '6']));
-//$user = User::new(['name'=>'Henry Morgan', 'email'=>'henrys email']);
->>>>>>> 09bfa82216cf7cde63ea40107a5784b6170092d0
 // $user->name = 'Bob';
 // echo $user->name;
 
@@ -81,6 +61,7 @@ var_dump($user->errors()->full_messages());
 //   $name = $user->name;
 //   echo "$name<br>";
 // }
+
 
 
 
@@ -147,7 +128,7 @@ var_dump($user->errors()->full_messages());
     <?php foreach ($users as $user): ?>
       <?php $user->setUpdatedAt(123); ?>
       <tr>
-        <td><?php echo $user->id; ?></td>
+        <td><?php echo $user->getId(); ?></td>
         <td><?php echo $user->getName(); ?></td>
         <td><?php echo $user->getEmail(); ?></td>
         <td><?php echo $user->getPasswordDigist(); ?></td>
@@ -189,7 +170,7 @@ var_dump($user->errors()->full_messages());
 </fieldset>
 <fieldset>
   <legend>pluck</legend>
-  <!-- <?php echo (string)User::pluck('id', 'name'); ?> -->
+  <?php echo (string)User::pluck('id', 'name'); ?>
 </fieldset>
 
 <hr>
