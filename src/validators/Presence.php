@@ -7,5 +7,4 @@ class Presence extends AbstractValidator {
       $this->record->errors()->add($this->attribute->name(), 'cant be blank');
     }
   }
-
 }
