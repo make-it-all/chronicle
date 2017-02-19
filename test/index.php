@@ -34,12 +34,25 @@ class User extends Chronicle\Base {
 
   public static $validations = [
     'name' => ['presence'=>true],
-    'email' => ['presence'=>true],
+    'email' => ['presence'=>['key' => 'value', 123]],
   ];
+
 
 }
 
-$user = User::fifth();
+$user = User::new();
+
+
+echo $user->validate();
+
+if ($user->errors()->any()) {
+  echo '<ul>';
+  foreach($user->errors()->full_messages() as $msg) {
+    echo "<li>$msg</li>";
+  }
+  echo '</ul>';
+}
+echo $user;
 //
 // foreach($users as $user) {
 //   echo $user;
