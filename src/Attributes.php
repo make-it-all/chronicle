@@ -66,7 +66,11 @@ trait Attributes {
   public function __get($key) {
     $key = "get_$key";
     if (array_key_exists($key, $this->attribute_methods)) {
-      return $this->attribute_methods[$key]();
+      if (method_exists($this, $key)) {
+        return $this->$key();
+      } else {
+        return $this->attribute_methods[$key]();
+      }
     } else {
       throw new \Exception("method not found: $key");
     }
