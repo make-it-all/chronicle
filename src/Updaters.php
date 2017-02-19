@@ -4,7 +4,7 @@
 trait Updaters {
 
   public function save() {
-    if ($this->validate()) {
+    if (!$this->validate()) {
       return false;
     }
     if ($this->is_new_record()) {
