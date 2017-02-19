@@ -13,7 +13,6 @@ class Base {
   public static $columns;
   public static $columns_names;
 
-
   private function __construct($attributes=[], $new_record=true) {
     $this->set_attributes_from_columns();
 

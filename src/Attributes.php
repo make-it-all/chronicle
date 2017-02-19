@@ -63,10 +63,19 @@ trait Attributes {
     return $attributes;
   }
 
-
-  public function __call($key, $args) {
+  public function __get($key) {
+    $key = "get_$key";
     if (array_key_exists($key, $this->attribute_methods)) {
-      return $this->attribute_methods[$key](...$args);
+      return $this->attribute_methods[$key]();
+    } else {
+      throw new \Exception("method not found: $key");
+    }
+  }
+
+  public function __set($key, $value) {
+    $key = "set_$key";
+    if (array_key_exists($key, $this->attribute_methods)) {
+      return $this->attribute_methods[$key]($value);
     } else {
       throw new \Exception("method not found: $key");
     }

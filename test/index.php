@@ -40,13 +40,20 @@ class User extends Chronicle\Base {
 }
 
 
-$users = User::all()->results();
 
-var_dump($users);
-foreach($users as $user) {
-  $name = $user->get_name();
-  echo "$name<br>";
-}
+$user = User::new(['name'=>'Henry Morgan', 'email'=>'henrys email']);
+$user->name = 'Bob';
+echo $user->name;
+
+//
+// $users = User::all()->results();
+//
+//
+// var_dump($users);
+// foreach($users as $user) {
+//   $name = $user->name;
+//   echo "$name<br>";
+// }
 
 
 

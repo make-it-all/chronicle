@@ -2,12 +2,12 @@
 
 trait Persistence {
 
-  private $new_record = true;
+  private $is_new_record = true;
   private $is_destroyed;
 
 
   public function is_new_record(){
-    return $this->new_record;
+    return $this->is_new_record;
   }
 
   public function is_destroyed() {

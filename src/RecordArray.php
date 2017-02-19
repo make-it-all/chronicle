@@ -15,7 +15,6 @@ class RecordArray implements \ArrayAccess, \Iterator {
     $this->_records = [];
     foreach($results as $result) {
       $record = $this->class::new_from_result($result);
-      $record->new_record = false;
       $this->_records[] = $record;
     }
   }
