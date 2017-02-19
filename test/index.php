@@ -35,7 +35,6 @@ class User extends Chronicle\Base {
   public static $validations = [
     'name' => ['presence'=>true, 'uniqueness'=>true],
     'email' => ['presence'=>['key' => 'value', 123]],
-    'password' => ['length' => ['min'=>6, 'max'=>100]]
     'current_sign_in_at' => ['length'=>['min', 10]],
   ];
 
