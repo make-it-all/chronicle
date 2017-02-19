@@ -33,15 +33,16 @@ class User extends Chronicle\Base {
   public static $table_name = 'users';
 
   public static $validations = [
-    'name' => ['presence'=>true],
+    'name' => ['presence'=>true, 'uniqueness'=>true],
     'email' => ['presence'=>['key' => 'value', 123]],
     'password' => ['length' => ['min'=>6, 'max'=>100]]
+    'current_sign_in_at' => ['length'=>['min', 10]],
   ];
 
 
 }
 
-$user = User::new();
+$user = User::new(['name'=>'Henry Morgan', 'email'=>'henrys email', 'current_sign_in_at'=>'123456789']);
 
 
 echo $user->validate();

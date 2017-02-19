@@ -73,7 +73,7 @@ trait Attributes {
         return $this->attribute_methods[$key]();
       }
     } else {
-      throw new \Exception("method not found: $key");
+      throw new Error\MethodNotFound("method not found: $key");
     }
   }
 
@@ -82,7 +82,7 @@ trait Attributes {
     if (array_key_exists($key, $this->attribute_methods)) {
       return $this->attribute_methods[$key]($value);
     } else {
-      throw new \Exception("method not found: $key");
+      throw new Error\MethodNotFound("method not found: $key");
     }
   }
 

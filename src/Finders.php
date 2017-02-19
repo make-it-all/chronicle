@@ -8,7 +8,7 @@ trait Finders {
 
   public static function find($id) {
     $record = self::find_by(['id' => $id]);
-    if ($record===null) { throw new Chronicle\RecordNotFound(); }
+    if ($record===null) { throw new Error\RecordNotFound(); }
     return $record;
   }
 

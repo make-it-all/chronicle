@@ -3,8 +3,8 @@
 class Uniqueness extends AbstractValidator {
 
   public function execute() {
-    // $cls = get_called_class();
-    // $cls::exists([$this->attribute->name() => $this->attribute->get()]);
+    $cls = get_called_class();
+    $cls::exists([$this->attribute => $this->attribute->get()]);
 
     //foreach (id in table) {
       //  if (/*lowercase column entry*/ === strtolower($this->attribute->get())) {

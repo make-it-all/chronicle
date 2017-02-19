@@ -12,7 +12,7 @@ trait Validation {
     $this->validators = [];
     foreach((static::$validations ?? []) as $attribute => $validations) {
       if (!$this->is_attribute($attribute)) {
-        throw new InvalidAttribute($attribute);
+        throw new Error\InvalidAttribute($attribute);
       }
       $attribute = $this->get_attribute($attribute);
       foreach($validations as $validation => $options) {
@@ -43,6 +43,9 @@ trait Validation {
             break;
           case 'confirmation':
             $validator = new Validators\Confirmation($this, $attribute, $options);
+            break;
+          case 'validates_with':
+            $validator = new Validators\ValidatesWith($this, $attribute, $options);
             break;
         }
         $this->validators[] = $validator;

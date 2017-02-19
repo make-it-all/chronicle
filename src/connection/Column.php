@@ -1,7 +1,5 @@
 <?php namespace Chronicle\Connection;
 
-class ColumnTypeUnknown extends \Exception {}
-
 class Column {
 
   public $name, $native_type, $type, $default, $limit, $null, $primary;
@@ -38,7 +36,7 @@ class Column {
       case preg_match('/char/i', $type):
       return 'string';
       default:
-      throw new ColumnTypeUnknown;
+      throw new \Chronicle\Error\ColumnTypeUnknown;
     }
   }
 

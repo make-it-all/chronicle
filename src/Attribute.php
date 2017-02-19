@@ -47,6 +47,10 @@ class Attribute {
     return is_null($this->get());
   }
 
+  public function human_name() {
+    return implode(' ', explode('_', $this->name()));
+  }
+
   public function get_for_db() {
     if (!$this->is_column()) { return $this->value; }
     return $this->column->cast_for_db($this->value);
