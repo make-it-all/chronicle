@@ -44,6 +44,9 @@ trait Validation {
           case 'confirmation':
             $validator = new Validators\Confirmation($this, $attribute, $options);
             break;
+          case 'validates_with':
+            $validator = new Validators\ValidatesWith($this, $attribute, $options);
+            break;
         }
         $this->validators[] = $validator;
       }

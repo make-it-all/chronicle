@@ -12,6 +12,7 @@
     "autoload": {
       "psr-4": {
         "Chronicle\\": "src",
+        "Chronicle\\Error\\": "src/Error",
         "Chronicle\\Connection\\": "src/connection",
         "Chronicle\\Validators\\": "src/validators",
         "Chronicle\\Query\\": "src/query",
