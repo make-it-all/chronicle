@@ -4,6 +4,7 @@ class Errors {
 
   private $record;
   private $messages = [];
+  private $attribute = [];
 
   public function __construct($record) {
     $this->record = $record;
@@ -13,6 +14,7 @@ class Errors {
     $key = $attribute->name();
     if (!array_key_exists($key, $this->messages)) {
       $this->messages[$key] = [];
+      $this->attributes[$key] = $attribute;
     }
     $this->messages[$key][] = $message;
   }
@@ -23,7 +25,8 @@ class Errors {
 
   public function full_messages() {
     $full_messages = [];
-    foreach($this->messages as $attribute => $messages) {
+    foreach($this->messages as $key => $messages) {
+      $attribute = $this->attributes[$key];
       $full_messages = array_merge($full_messages, array_map(function($message) use ($attribute) {
         $name = $attribute->human_name();
         return "$name $message";

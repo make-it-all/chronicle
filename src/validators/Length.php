@@ -16,7 +16,7 @@ class Length extends AbstractValidator {
     }
     else if ($limit[0] === 'min') {
       if (strlen($this->attribute->get()) < $limit[1]) {
-        $this->record->errors()->add($this->attribute, "length is too short, must be atleast $limit[1] characters long.");
+        $this->record->errors()->add($this->attribute, "length is too short, must be at least $limit[1] characters long.");
       }
     }
     else if ($limit[0] === 'max') {

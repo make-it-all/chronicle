@@ -43,7 +43,6 @@ class User extends Chronicle\Base {
 
 $user = User::new(['name'=>'Henry Morgan', 'email'=>'henrys email', 'current_sign_in_at'=>'123456789']);
 
-
 echo $user->validate();
 
 if ($user->errors()->any()) {
