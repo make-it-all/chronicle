@@ -37,7 +37,8 @@ trait Updaters {
 
   public function destroy() {
     $query = new Query\Delete(get_called_class());
-    $query->where(['id' => $this->id()]);
+    $query->where(['id' => $this->id()])->results();
+    $query->execute();
   }
 
 }

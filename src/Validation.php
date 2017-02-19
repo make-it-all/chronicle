@@ -10,6 +10,7 @@ trait Validation {
 
   private function parse_validations() {
     if ($this->validators !== null) { return; }
+    $this->validators = [];
     foreach((static::$validations ?? []) as $attribute => $validations) {
       if (!$this->is_attribute($attribute)) {
         throw new InvalidAttribute($attribute);
