@@ -12,7 +12,7 @@ trait Validation {
     $this->validators = [];
     foreach((static::$validations ?? []) as $attribute => $validations) {
       if (!$this->is_attribute($attribute)) {
-        throw new InvalidAttribute($attribute);
+        throw new Error\InvalidAttribute($attribute);
       }
       $attribute = $this->get_attribute($attribute);
       foreach($validations as $validation => $options) {

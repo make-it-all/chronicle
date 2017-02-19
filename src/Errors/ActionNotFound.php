@@ -1,3 +1,3 @@
-<?php namespace Chronicle\Error;
+<?php namespace Error;
 
 class ActionNotFound extends \Exception {}
