@@ -4,8 +4,7 @@
 trait Updaters {
 
   public function save() {
-    $this->validate();
-    if ($this->errors->any()) {
+    if ($this->validate()) {
       return false;
     }
     if ($this->is_new_record()) {
@@ -18,8 +17,6 @@ trait Updaters {
   private function _create_record() {
     $query = new Query\Insert(get_called_class());
     $query->set_attributes($this->attributes());
-    echo $query->toSQL();
-
     return $query->execute();
   }
 

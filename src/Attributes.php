@@ -17,6 +17,7 @@ trait Attributes {
     $attribute = new Attribute($name_or_column);
     $this->attributes[$attribute->name()] = $attribute;
     $attribute->attribute_methods($this, $this->attribute_methods);
+    return $attribute;
   }
 
   public function is_attribute($attribute) {

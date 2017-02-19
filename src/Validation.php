@@ -60,7 +60,7 @@ trait Validation {
     $this->parse_validations();
     $this->errors = new Errors($this);
     array_map(function($validator) {$validator->execute();}, $this->validators);
-    return $this->errors->any();
+    return $this->errors()->empty();
   }
 
 }
