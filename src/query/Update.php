@@ -4,7 +4,7 @@ class Update extends AbstractQuery {
   use Parts\Where;
 
   private $executed = false;
-  private $set = []
+  private $set = [];
 
   public function __construct($class) {
     $this->class = $class;
