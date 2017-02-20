@@ -1,5 +1,13 @@
 <?php namespace Chronicle\Validators;
 
+/*
+  ValidatesWith Validator: Validates whether any value against another function.
+
+  @Contributers: Christopher Head
+
+*/
+
+class
 class ValidatesWith extends AbstractValidator {
 
   public function execute() {

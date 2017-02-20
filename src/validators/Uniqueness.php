@@ -1,5 +1,13 @@
 <?php namespace Chronicle\Validators;
 
+/*
+  Uniqueness Validator:
+
+  @Contributers: Henry Morgan
+
+*/
+
+class
 class Uniqueness extends AbstractValidator {
 
   public function execute() {
