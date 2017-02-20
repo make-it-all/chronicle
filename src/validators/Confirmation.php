@@ -1,13 +1,9 @@
 <?php namespace Chronicle\Validators;
-
 /*
   Confirmation Validator: Validates whether any two strings are identicle,
                           if not then adds an error to the record.
-
   @Contributers: Christopher Head
-
 */
-
 class Confirmation extends AbstractValidator {
 
   public function execute() {
