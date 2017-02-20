@@ -11,22 +11,9 @@ Chronicle\Base::setup_connection([
 ]);
 
 
-class Hardware extends Chronicle\Base {
-
-  public static $table_name = 'hardware';
-
+class Problem extends Chronicle\Base {
+  public static $table_name = 'problems';
 }
-
-class HardwareType extends Chronicle\Base {
-
-  public static $table_name = 'hardware_types';
-
-  public function hardwares() {
-    return Hardware::where(['hardware_type_id'=>$this->id()]);
-  }
-
-}
-
 
 class User extends Chronicle\Base {
 
@@ -37,22 +24,24 @@ class User extends Chronicle\Base {
     'email' => ['presence'=>['key' => 'value', 123]],
     'current_sign_in_at' => ['length'=>['min', 10]],
   ];
-
-
 }
 
-$user = User::new(['name'=>'Henry Morgan', 'email'=>'henrys email', 'current_sign_in_at'=>'123456789']);
 
-echo $user->validate();
+$user = User::find(3)->name;
 
-if ($user->errors()->any()) {
-  echo '<ul>';
-  foreach($user->errors()->full_messages() as $msg) {
-    echo "<li>$msg</li>";
-  }
-  echo '</ul>';
-}
-echo $user;
+//
+// $user = User::new(['name'=>'Henry Morgan', 'email'=>'henrys email', 'current_sign_in_at'=>'123456789']);
+//
+// echo $user->validate();
+//
+// if ($user->errors()->any()) {
+//   echo '<ul>';
+//   foreach($user->errors()->full_messages() as $msg) {
+//     echo "<li>$msg</li>";
+//   }
+//   echo '</ul>';
+// }
+// echo $user;
 //
 // foreach($users as $user) {
 //   echo $user;

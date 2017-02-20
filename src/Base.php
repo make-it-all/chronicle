@@ -10,7 +10,7 @@ class Base {
   use Validation;
 
   public static $table_name;
-  public static $columns;
+  private static $columns = [];
   public static $columns_names;
 
   protected function __construct($attributes=[], $new_record=true) {
@@ -49,17 +49,17 @@ class Base {
   }
 
   public function set_attributes_from_columns() {
-    $cols = self::columns();
+    $cols = static::columns();
     array_walk($cols, function($column){
       $this->add_attribute($column);
     });
   }
 
   public static function columns() {
-    if (!isset(self::$columns)) {
-      static::$columns = self::connection()->columns(static::$table_name);
+    if (!isset(static::$columns[get_called_class()])) {
+      static::$columns[get_called_class()] = static::connection()->columns(static::$table_name);
     }
-    return self::$columns;
+    return static::$columns[get_called_class()];
   }
 
   public static function column_names() {
