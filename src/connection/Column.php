@@ -62,16 +62,6 @@ class Column {
     }
   }
 
-
-
-  // String
-  // Integer
-  // Float (floating point numbers - also called double)
-  // Boolean
-  // Array
-  // Object
-  // NULL
-  // Resource
   public function cast_for_db($value) {
     if (is_null($value)) { return null; }
     $func_name = "cast_for_db_to_$this->type";

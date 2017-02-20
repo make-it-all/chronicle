@@ -1,5 +1,8 @@
 <?php namespace Chronicle\Validators;
-
+/*
+  AbstractValidator:
+  @contributers Henry Morgan
+*/
 abstract class AbstractValidator {
 
   protected $record;

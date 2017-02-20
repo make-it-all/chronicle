@@ -1,5 +1,11 @@
 <?php namespace Chronicle\Validators;
 
+/*
+  Numericality Validator: Validates whether any value is composed entirely of
+                          numbers, adds an error to the record if it is not.
+  @contributers Chris Head
+*/
+
 class Numericality extends AbstractValidator {
 
   public function execute() {
