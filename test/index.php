@@ -11,22 +11,9 @@ Chronicle\Base::setup_connection([
 ]);
 
 
-class Hardware extends Chronicle\Base {
-
-  public static $table_name = 'hardware';
-
+class Problem extends Chronicle\Base {
+  public static $table_name = 'problems';
 }
-
-class HardwareType extends Chronicle\Base {
-
-  public static $table_name = 'hardware_types';
-
-  public function hardwares() {
-    return Hardware::where(['hardware_type_id'=>$this->id()]);
-  }
-
-}
-
 
 class User extends Chronicle\Base {
 
@@ -75,62 +62,21 @@ $user = User::new(['name'=>'          ',
                    ]);
 
 
-  // public static $table_name = 'problems';
+$user = User::find(3)->name;
 
-  // public static $validations = [
-  //   'hardware_id' => ['numericality'=>true, 'length'=>['max',11]],
-  //   'software_id' => ['numericality'=>true, 'length'=>['max',11]],
-  //   'specialization_id' => ['numericality'=>true, 'length'=>['max',11]],
-  //   'submitted_by' => ['presence'=>true, 'numericality'=>true, 'length'=>['max',11]],
-  //   'assigned_to' => ['numericality'=>true, 'length'=>['max',11]],
-  //   'worked_on' => ['presence'=>true, 'numericality'=>true, 'length'=>['equal',1]],
-  //   'solution_id' => ['numericality'=>true, 'length'=>['max',11]],
-  //   'updated_by' => ['presence'=>true, 'numericality'=>true, 'length'=>['max',11]],
-  //   'updated_at' => ['format'=>true],
-  //   'created_by' => ['presence'=>true, 'numericality'=>true, 'length'=>['max',11]],
-  //   'created_at' => ['format'=>true]
-
-  // ];
-
-  // public static $table_name = 'personnel';
-
-  // public static $validations = [
-  //   'name' => ['presence'=>true, 'length'=>['max', 255]],
-  //   'job_title' => ['presence'=>true, 'length'=>['max', 255]],
-  //   'email' => ['presence'=>true, 'length'=>['max', 255], 'format'=>true, 'uniqueness'=>true],
-  //   'telephone_number' => ['presence'=>true, 'length'=>['max', 255], 'numericality'=>true, 'uniqueness'=>true],
-  //   'branch_id' => ['presence'=>true, 'numericality'=>true, 'length'=>['max',11]],
-  //   'department_id' => ['presence'=>true, 'numericality'=>true, 'length'=>['max',11]],
-  //   'updated_by' => ['presence'=>true, 'numericality'=>true, 'length'=>['max',11]],
-  //   'updated_at' => ['format'=>true],
-  //   'created_by' => ['presence'=>true, 'numericality'=>true, 'length'=>['max',11]],
-  //   'created_at' => ['format'=>true]
-  // ];
-
-  // public static $table_name = 'calls';
-
-  // public static $validations = [
-  //   'operator_id' => ['presence'=>true, 'numericality'=>true, 'length'=>['max',11]],
-  //   'caller_id' => ['presence'=>true, 'numericality'=>true, 'length'=>['max',11]],
-  //   'updated_by' => ['presence'=>true, 'numericality'=>true, 'length'=>['max',11]],
-  //   'updated_at' => ['format'=>true],
-  //   'created_by' => ['presence'=>true, 'numericality'=>true, 'length'=>['max',11]],
-  //   'created_at' => ['format'=>true]
-
-  // ];
-
-
-
-echo $user->validate();
-
-if ($user->errors()->any()) {
-  echo '<ul>';
-  foreach($user->errors()->full_messages() as $msg) {
-    echo "<li>$msg</li>";
-  }
-  echo '</ul>';
-}
-echo $user;
+//
+// $user = User::new(['name'=>'Henry Morgan', 'email'=>'henrys email', 'current_sign_in_at'=>'123456789']);
+//
+// echo $user->validate();
+//
+// if ($user->errors()->any()) {
+//   echo '<ul>';
+//   foreach($user->errors()->full_messages() as $msg) {
+//     echo "<li>$msg</li>";
+//   }
+//   echo '</ul>';
+// }
+// echo $user;
 //
 // foreach($users as $user) {
 //   echo $user;
