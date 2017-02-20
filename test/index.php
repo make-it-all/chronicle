@@ -66,6 +66,7 @@ class User extends Chronicle\Base {
   ];
 
 
+$user = User::new(['name'=>false]);
 
 }
 
