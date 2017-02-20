@@ -23,15 +23,14 @@ class Base {
     } else {
       $this->assign_initial_attributes($attributes);
     }
-    #run init callbacks
 
   }
 
   public static function new($attributes=[]) {
     $cls = get_called_class();
-    $record = new $cls($attributes);
-    return $record;
+    return new $cls($attributes);
   }
+
   public static function new_from_result($attributes=[]) {
     $cls = get_called_class();
     $record = new $cls($attributes, false);

@@ -4,11 +4,7 @@
 trait Updaters {
 
   public function save() {
-    $this->send_callback('before_validation');
-    if (!$this->validate()) {
-      return false;
-    }
-    $this->send_callback('after_validation');
+    if (!$this->validate()) { return false; }
     if ($this->is_new_record()) {
       $this->send_callback('before_create');
       $this->send_callback('before_save');
@@ -32,7 +28,7 @@ trait Updaters {
     $query = new Query\Update(get_called_class());
     $query->set_attributes($this->attributes());
     echo $query->toSQL();
-    return Base::connection()->insert(get_called_class()::$table_name, $attrs);
+    return $query->execute();
   }
 
   public function update($attrs) {

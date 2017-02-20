@@ -84,6 +84,7 @@ class Adapter {
     $sql = '';
     foreach($attributes as $attribute) {
       if (!$attribute->is_column()) { continue; }
+      if (!$attribute->has_changed()) { continue; }
       $cols[] = $this->sanitize_column_name($attribute->name());
       $vals[] = $this->sanitize_value($attribute->get_for_db());
     }

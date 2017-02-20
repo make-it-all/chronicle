@@ -64,9 +64,12 @@ trait Validation {
   }
 
   public function validate() {
+
     $this->parse_validations();
     $this->errors = new Errors($this);
+    $this->send_callback('before_validation');
     array_map(function($validator) {$validator->execute();}, $this->validators);
+    $this->send_callback('after_validation');
     return $this->errors()->empty();
   }
 

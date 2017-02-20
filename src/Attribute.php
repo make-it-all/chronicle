@@ -9,6 +9,7 @@ class Attribute {
     if ($column_or_name instanceof \Chronicle\Connection\Column) {
       $this->column = $column_or_name;
       $this->name = $column_or_name->name;
+      $this->set_initial_value($column_or_name->default);
     } else {
       $this->name = (string)$column_or_name;
     }
@@ -45,6 +46,10 @@ class Attribute {
 
   public function is_null() {
     return is_null($this->get());
+  }
+
+  public function has_changed() {
+    return $this->get() !== $this->get_was();
   }
 
   public function human_name() {
