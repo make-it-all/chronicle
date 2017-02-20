@@ -1,4 +1,4 @@
-``<?php namespace Chronicle\Connection;
+<?php namespace Chronicle\Connection;
 
 class Column {
 
