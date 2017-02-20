@@ -56,10 +56,10 @@ class Base {
   }
 
   public static function columns() {
-    if (!isset(static::$columns[get_called_class()])) {
-      static::$columns[get_called_class()] = static::connection()->columns(static::$table_name);
+    if (!isset(self::$columns[get_called_class()])) {
+      self::$columns[get_called_class()] = self::connection()->columns(static::$table_name);
     }
-    return static::$columns[get_called_class()];
+    return self::$columns[get_called_class()];
   }
 
   public static function column_names() {
