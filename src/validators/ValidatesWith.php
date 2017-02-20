@@ -9,6 +9,7 @@ class ValidatesWith extends AbstractValidator {
 
   public function execute() {
     $function_name = $this->options;
-    $this->$funtion_name($this->attribute);
-    }
+    $this->$function_name($this->attribute);
   }
+
+}
