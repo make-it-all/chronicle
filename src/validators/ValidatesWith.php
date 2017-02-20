@@ -3,8 +3,6 @@
   ValidatesWith Validator: Validates whether any value against another function.
   @contributers Chris Head
 */
-
-class
 class ValidatesWith extends AbstractValidator {
 
   public function execute() {

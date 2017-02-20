@@ -3,7 +3,6 @@
   Uniqueness Validator:
   @contributers Henry Morgan
 */
-class
 class Uniqueness extends AbstractValidator {
 
   public function execute() {

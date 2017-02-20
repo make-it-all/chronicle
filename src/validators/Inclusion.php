@@ -4,7 +4,6 @@
                        if not, then adds an error to the record.
   @contributers Chris Head
 */
-class
 class Inclusion extends AbstractValidator {
 
   public function execute() {

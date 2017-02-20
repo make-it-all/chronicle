@@ -6,7 +6,6 @@
                     specific test.
   @contributers Chris Head
 */
-class
 class Length extends AbstractValidator {
 
   // Tests whether a string's length is within a range of values.

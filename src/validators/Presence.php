@@ -5,7 +5,6 @@
                       whitespace or contains no characters.
   @contributers Chris Head
 */
-class
 class Presence extends AbstractValidator {
 
   public function execute() {
