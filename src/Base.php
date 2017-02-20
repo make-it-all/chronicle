@@ -38,7 +38,11 @@ class Base {
     return $record;
   }
 
-
+  public function send_callback($callback) {
+    if (method_exists($this, $callback)) {
+      $this->$callback();
+    }
+  }
 
   public static function count() {
     return self::connection()->count(static::$table_name);
