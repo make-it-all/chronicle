@@ -1,7 +1,7 @@
 <?php namespace Chronicle\Validators;
 /*
   Uniqueness Validator:
-  @Contributers: Henry Morgan
+  @contributers Henry Morgan
 */
 class
 class Uniqueness extends AbstractValidator {

@@ -1,7 +1,7 @@
 <?php namespace Chronicle\Validators;
 /*
   Format Validator:
-  @Contributers: Henry Morgan
+  @contributers Henry Morgan
 */
 class Format extends AbstractValidator {
 

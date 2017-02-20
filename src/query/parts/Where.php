@@ -1,20 +1,9 @@
 <?php namespace Chronicle\Query\Parts;
 
+//Provides functionality to allow the use of where queries
 trait Where {
 
   private $where = [];
-
-  /*
-  User::where('column = 234');
-  User::where('column = 234 AND true');
-  User::where('column = ? and col2 = ?', [true, 'value2']);
-  User::where('column = :first_arg', ['first_arg'=>'123']);
-  User::where('column = :first_arg and x=?', ['first_arg'=>'123', 123]);
-
-  User::where(['column'=>'value']);
-
-  User::where(['column'=>['value', 'value2', 3]]);
-  */
   public function where(...$args) {
     if (is_string($args[0])) {
       $condition = $args[0];

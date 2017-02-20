@@ -4,7 +4,7 @@
                     than or greater than a given value, or within a range of
                     values. An error is added to the record if it fails its
                     specific test.
-  @Contributers: Christopher Head
+  @contributers Chris Head
 */
 class
 class Length extends AbstractValidator {

@@ -2,7 +2,7 @@
 /*
   Numericality Validator: Validates whether any value is composed entirely of
                           numbers, adds an error to the record if it is not.
-  @Contributers: Christopher Head
+  @contributers Chris Head
 */
 class
 class Numericality extends AbstractValidator {

@@ -2,7 +2,7 @@
 /*
   Inclusion Validator: Validates whether any value is included within an array,
                        if not, then adds an error to the record.
-  @Contributers: Christopher Head
+  @contributers Chris Head
 */
 class
 class Inclusion extends AbstractValidator {

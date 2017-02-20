@@ -3,41 +3,51 @@
 class Adapter {
   use DatabaseStatements;
 
+  //
   public function __construct($connection) {
     $this->connection = $connection;
   }
 
+  //Allows the use of select queries
   public function select($sql) {
     return $this->execute($sql)->fetchAll();
   }
 
+  //Allows the use of select all queries
   public function select_all($table_name) {
     $sql = "SELECT * FROM `$table_name`";
     return $this->execute($sql)->fetchAll();
   }
 
+  //Allows the use of insert queries
   public function insert($sql) {
     return $this->execute($sql);
   }
 
+  //Allows the use of update queries
   public function update($table_name, $attributes) {
     return $this->execute($sql);
   }
 
+  //Allows the use of delete queries
   public function delete($sql) {
     return $this->execute($sql);
   }
 
+  //Returns the number of rows in a given table
   public function count($table_name) {
     $sql = "SELECT COUNT(*) FROM `$table_name`";
     $result = $this->execute($sql);
     return $result->fetchColumn();
   }
+
+  //Checks if the given table is in the database
   public function table_exists($table_name) {
     $sql = "SHOW TABLES LIKE '$table_name'";
     return $this->execute($sql)->rowCount() > 0;
   }
 
+  //Returns an array of column names from a given table
   public function columns($table_name) {
     $sql = "SHOW FIELDS FROM $table_name";
     $columns = [];
@@ -55,13 +65,6 @@ class Adapter {
     return $this->connection->query($sql);
   }
 
-  /*
-    'str' => 'str',
-    123 => '123',
-    false => '0|f|false',
-    true => '1|t|true',
-    null => 'null'
-  */
   public function sanitize_value($value) {
     if (is_null($value)) {
       return "NULL";
@@ -77,7 +80,6 @@ class Adapter {
     return "`$name`";
   }
 
-  // (column1,column2,column3,...) VALUES (value1,value2,value3,...);
   public function parse_attributes_for_insert($attributes) {
     $cols = [];
     $vals = [];

@@ -2,7 +2,7 @@
 /*
   Confirmation Validator: Validates whether any two strings are identicle,
                           if not then adds an error to the record.
-  @Contributers: Christopher Head
+  @contributers Chris Head
 */
 class Confirmation extends AbstractValidator {
 

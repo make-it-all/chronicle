@@ -1,7 +1,7 @@
 <?php namespace Chronicle\Validators;
 /*
   AbstractValidator:
-  @Contributers: Henry Morgan
+  @contributers Henry Morgan
 */
 abstract class AbstractValidator {
 
