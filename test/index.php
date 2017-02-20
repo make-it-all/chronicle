@@ -11,26 +11,39 @@ Chronicle\Base::setup_connection([
 ]);
 
 
-class Problem extends Chronicle\Base {
-  public static $table_name = 'problems';
+class Hardware extends Chronicle\Base {
+
+  public static $table_name = 'hardware';
+
 }
+
+class HardwareType extends Chronicle\Base {
+
+  public static $table_name = 'hardware_types';
+
+  public function hardwares() {
+    return Hardware::where(['hardware_type_id'=>$this->id()]);
+  }
+
+}
+
 
 class User extends Chronicle\Base {
 
   public static $table_name = 'users';
 
   public static $validations = [
-    'name' => ['presence'=>true, 'length'=>['max', 10], 'format'=>true],
+    'name' => ['presence'=>true, 'length'=>['max', 255]],
     'email' => ['presence'=>true, 'length'=>['max', 255], 'format'=>true, 'uniqueness'=>true],
-    'password_digest' => ['presence'=>true, 'length'=>['max', 10]],
+    'password_digest' => ['presence'=>true, 'length'=>['max', 255]],
     'current_sign_in_at' => ['format'=>true],
     'current_sign_in_ip' => ['length'=>['max',10], 'numericality'=>true, 'uniqueness'=>true],
     'last_sign_in_at' => ['format'=>true],
     'last_sign_in_ip' => ['length'=>['max',10], 'numericality'=>true],
     'personnel_id' => ['numericality'=>true, 'length'=>['max',11], 'uniqueness'=>true],
-    'is_specialist' => ['presence'=>true, 'numericality'=>true, 'length'=>['equal',2], 'inclusion'=>['0','1']],
+    'is_specialist' => ['presence'=>true, 'numericality'=>true, 'length'=>['equal',1]],
     'is_operator' => ['presence'=>true, 'numericality'=>true, 'length'=>['equal',1]],
-    'is_admin' => ['presence'=>true, 'numericality'=>true, 'length'=>['equal',2]],
+    'is_admin' => ['presence'=>true, 'numericality'=>true, 'length'=>['equal',1]],
     'is_lboro_admin' => ['presence'=>true, 'numericality'=>true, 'length'=>['equal',1]],
     'last_seen_at' => ['format'=>true],
     'updated_by' => ['presence'=>true, 'numericality'=>true, 'length'=>['max',11]],
@@ -39,49 +52,22 @@ class User extends Chronicle\Base {
     'created_at' => ['format'=>true]
 
   ];
-  }
 
-$user = User::new(['name'=>'          ', 
-                   'email'=>'henßys email', 
-                   'password_digest'=>'123456789', 
-                   'current_sign_in_at'=>'123456789', 
-                   'current_sign_in_ip'=>'2354',
-                   'last_sign_in_at' => '3543245',
-                   'last_sign_in_ip' => '5363465',
-                   'personnel_id' => '3452354',
-                   'is_specialist' => '-1',
-                   'is_operator' => '9',
-                   'is_admin' => '00',
-                   'is_lboro_admin' => '0',
-                   'last_seen_at' => '0000000',
-                   'updated_by' => '239479',
-                   'updated_at' => '234567',
-                   'created_by' => 'a',
-                   'created_at' => 's',
 
-                   ]);
+}
 
-var_dump($user->validate());
+$user = User::new(['name'=>'f']);
+
+echo $user->validate();
 
 if ($user->errors()->any()) {
-  foreach ($user->errors()->full_messages() as $msg) {
-    echo '<br>';
-    echo $msg;
+  echo '<ul>';
+  foreach($user->errors()->full_messages() as $msg) {
+    echo "<li>$msg</li>";
   }
+  echo '</ul>';
 }
-//
-// $user = User::new(['name'=>'Henry Morgan', 'email'=>'henrys email', 'current_sign_in_at'=>'123456789']);
-//
-// echo $user->validate();
-//
-// if ($user->errors()->any()) {
-//   echo '<ul>';
-//   foreach($user->errors()->full_messages() as $msg) {
-//     echo "<li>$msg</li>";
-//   }
-//   echo '</ul>';
-// }
-// echo $user;
+echo $user;
 //
 // foreach($users as $user) {
 //   echo $user;
