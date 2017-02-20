@@ -67,6 +67,9 @@ class RecordArray implements \ArrayAccess, \Iterator {
     return !$this->empty();
   }
 
+  public function class() {
+    return $this->class;
+  }
 
   //----- ArrayAccess - Methods
   public function offsetExists($key) {

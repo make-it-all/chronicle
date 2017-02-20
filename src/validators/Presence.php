@@ -3,8 +3,9 @@
 class Presence extends AbstractValidator {
 
   public function execute() {
+
     $val = $this->attribute->get();
-    if (isset($val) && !ctype_space($val)) {
+    if (!isset($val) || ctype_space($val) || (mb_strlen($val,'utf8') < 1)) {
       $this->record->errors()->add($this->attribute, 'cant be blank');
     }
   }
