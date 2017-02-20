@@ -16,6 +16,14 @@ trait Finders {
     return self::where(...$args)->limit(1)->first();
   }
 
+  public static function find_or_initialize_by($args) {
+    $record = self::find_by($args);
+    if ($record === null) {
+      $record = self::new($args);
+    }
+    return $record;
+  }
+
   public static function where(...$args) {
     return self::all()->where(...$args);
   }

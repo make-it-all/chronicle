@@ -1,5 +1,15 @@
 <?php namespace Chronicle;
 
+/*
+  It provides a variety of methods designed to manipulate, validate, query, and alter
+  the database a simplistic and meaningful way.
+
+  This model provides validations for all fields where the data is required to
+  follow a format. for instance some data may be invalid if not present, or to long
+
+  YADA YADA.... TODO
+
+*/
 class Base {
 
   use Connection\Connection;
