@@ -4,13 +4,21 @@
 trait Updaters {
 
   public function save() {
+    $this->send_callback('before_validation');
     if (!$this->validate()) {
       return false;
     }
+    $this->send_callback('after_validation');
     if ($this->is_new_record()) {
+      $this->send_callback('before_create');
+      $this->send_callback('before_save');
       return $this->_create_record();
+      $this->send_callback('after_save');
+      $this->send_callback('after_create');
     } else {
+      $this->send_callback('before_save');
       return $this->_update_record();
+      $this->send_callback('after_save');
     }
   }
 
