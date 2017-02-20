@@ -32,6 +32,18 @@ class User extends Chronicle\Base {
 
   public static $table_name = 'users';
 
+  public function before_validation() {
+    echo "Before Validation";
+  }
+
+  public function before_create() {
+    echo "Before Create";
+  }
+
+  public function before_save() {
+    echo "Before Save";
+  }
+
   public static $validations = [
     'name' => ['presence'=>true, 'length'=>['max', 255]],
     // 'email' => ['presence'=>true, 'length'=>['max', 255], 'format'=>true, 'uniqueness'=>true],
@@ -58,7 +70,7 @@ class User extends Chronicle\Base {
 }
 
 $user = User::new(['name'=>'ح']);
-
+$user->save();
 echo $user->validate();
 
 if ($user->errors()->any()) {
