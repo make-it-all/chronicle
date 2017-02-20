@@ -64,10 +64,6 @@ class User extends Chronicle\Base {
     // 'created_at' => ['format'=>true]
 
   ];
-
-
-$user = User::new(['name'=>false]);
-
 }
 
 $user = User::new(['name'=>'ح']);
