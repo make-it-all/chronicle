@@ -4,7 +4,8 @@ class Presence extends AbstractValidator {
 
   public function execute() {
 
-    if (empty($this->attribute->get())) {
+    $val = $this->attribute->get();
+    if (isset($val) && !ctype_space($val)) {
       $this->record->errors()->add($this->attribute, 'cant be blank');
     }
   }
