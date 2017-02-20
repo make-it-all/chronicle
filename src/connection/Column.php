@@ -1,4 +1,4 @@
-<?php namespace Chronicle\Connection;
+``<?php namespace Chronicle\Connection;
 
 class Column {
 
@@ -74,6 +74,10 @@ class Column {
     if (is_object($value) && method_exists($value, '__toString')) { return (string)$value; }
     if ($value instanceof \DateTime) { return $value->format('Y-m-d H:i:s'); }
     return '';
+  }
+
+  public function cast_for_db_to_text($value) {
+    return $this->cast_for_db_to_string($value);
   }
 
   public function cast_for_db_to_integer($value) {
