@@ -19,6 +19,8 @@ class Errors {
     $this->messages[$key][] = $message;
   }
 
+  //If an error occurs while trying to save to the database this function will create messages
+  //to let both the user and admins know what went wrong
   public function messages() {
     return $this->messages;
   }

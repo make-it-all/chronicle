@@ -5,14 +5,17 @@ trait Attributes {
   private $attributes = [];
   public $attribute_methods = [];
 
+  //returns the entry with the id set in attributes
   public function id() {
     return $this->attributes['id']->get();
   }
 
+  //returns all the attributes attached to the calling class
   public function attributes() {
     return $this->attributes;
   }
 
+  //
   public function add_attribute($name_or_column) {
     $attribute = new Attribute($name_or_column);
     $this->attributes[$attribute->name()] = $attribute;
@@ -20,6 +23,7 @@ trait Attributes {
     return $attribute;
   }
 
+  //Checks whether the variable passed in is an attribute
   public function is_attribute($attribute) {
     return array_key_exists($attribute, $this->attributes);
   }
