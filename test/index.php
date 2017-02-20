@@ -56,14 +56,19 @@ $user = User::new(['name'=>'          ',
                    'last_seen_at' => '0000000',
                    'updated_by' => '239479',
                    'updated_at' => '234567',
-                   'created_by' => '547467',
-                   'created_at' => '356456',
+                   'created_by' => 'a',
+                   'created_at' => 's',
 
                    ]);
 
+var_dump($user->validate());
 
-$user = User::find(3)->name;
-
+if ($user->errors()->any()) {
+  foreach ($user->errors()->full_messages() as $msg) {
+    echo '<br>';
+    echo $msg;
+  }
+}
 //
 // $user = User::new(['name'=>'Henry Morgan', 'email'=>'henrys email', 'current_sign_in_at'=>'123456789']);
 //
