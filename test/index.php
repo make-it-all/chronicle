@@ -55,7 +55,7 @@ class User extends Chronicle\Base {
 
 }
 
-$user = User::new(['is_specialist'=>'0']);
+$user = User::new(['name'=>'f']);
 
 echo $user->validate();
 
