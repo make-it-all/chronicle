@@ -30,7 +30,7 @@ class Update extends AbstractQuery {
 
   public function toSQL() {
     $from = $this->table_name;
-    $set = 'SET ' .$this->connection()->parse_attributes_for_insert($this->attributes);
+    $set = 'SET ' .$this->connection()->parse_attributes_for_update($this->attributes);
     $where = empty($this->where)? '' : 'WHERE ' .implode(' AND ', $this->where);
     return "UPDATE $from $set $where";
   }
