@@ -5,7 +5,7 @@ trait Updaters {
 
   public function save() {
     if (!$this->validate()) { return false; }
-    if ($this->is_new_record()) {
+    if ($this->id() == null) {
       $this->send_callback('before_create');
       $this->send_callback('before_save');
       return $this->_create_record();
@@ -25,8 +25,10 @@ trait Updaters {
   }
 
   private function _update_record() {
+    if (!$this->changed()) {return;}
     $query = new Query\Update(get_called_class());
     $query->set_attributes($this->attributes());
+    $query->where(['id' => $this->id()]);
     echo $query->toSQL();
     return $query->execute();
   }

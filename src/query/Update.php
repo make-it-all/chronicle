@@ -11,8 +11,8 @@ class Update extends AbstractQuery {
     $this->table_name = $class::$table_name ?? null;
   }
 
-  public function set($attrs) {
-    $this->set = array_merge($this->set, $attrs);
+  public function set_attributes($attributes) {
+    $this->attributes = $attributes;
   }
 
   private function parseSet() {
@@ -27,16 +27,17 @@ class Update extends AbstractQuery {
     }
     return implode(',', $attrs);
   }
+
   public function toSQL() {
     $from = $this->table_name;
-    $set = 'SET ' . $this->parseSet();
+    $set = 'SET ' .$this->connection()->parse_attributes_for_insert($this->attributes);
     $where = empty($this->where)? '' : 'WHERE ' .implode(' AND ', $this->where);
-    return "UPDATE $from $where";
+    return "UPDATE $from $set $where";
   }
 
   public function execute() {
     if (!$this->executed) {
-      $this->results = \Chronicle\Base::connection()->delete($this->toSQL());
+      $this->results = \Chronicle\Base::connection()->update($this->toSQL());
       $this->executed = true;
     }
     return $this->results;

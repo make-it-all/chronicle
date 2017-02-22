@@ -25,7 +25,7 @@ class Adapter {
   }
 
   //Allows the use of update queries
-  public function update($table_name, $attributes) {
+  public function update($sql) {
     return $this->execute($sql);
   }
 
@@ -81,18 +81,17 @@ class Adapter {
   }
 
   public function parse_attributes_for_insert($attributes) {
-    $cols = [];
-    $vals = [];
-    $sql = '';
+    $attrs = [];
     foreach($attributes as $attribute) {
       if (!$attribute->is_column()) { continue; }
       if (!$attribute->has_changed()) { continue; }
-      $cols[] = $this->sanitize_column_name($attribute->name());
-      $vals[] = $this->sanitize_value($attribute->get_for_db());
+      var_dump($attribute->get());
+      var_dump($attribute->get_was());
+      $name = $this->sanitize_column_name($attribute->name());
+      $val = $this->sanitize_value($attribute->get_for_db());
+      $attrs[] = "$name=$val";
     }
-    $cols = implode(',', $cols);
-    $vals = implode(',', $vals);
-    return "($cols) VALUES ($vals)";
+    return implode(', ', $attrs);
   }
 
 }

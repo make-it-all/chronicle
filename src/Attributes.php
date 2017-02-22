@@ -68,6 +68,13 @@ trait Attributes {
     return $attributes;
   }
 
+  public function changed() {
+    foreach($this->attributes as $attribute) {
+      if ($attribute->has_changed()) { return true; }
+    }
+    return false;
+  }
+
   public function __get($key) {
     $key = "get_$key";
     if (array_key_exists($key, $this->attribute_methods)) {

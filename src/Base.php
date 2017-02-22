@@ -27,6 +27,7 @@ class Base {
   protected function __construct($attributes=[], $new_record=true) {
     $this->set_attributes_from_columns();
 
+    $new_record = !array_key_exists('id', $attributes);
     $this->is_new_record = $new_record;
 
     if ($new_record) {
@@ -46,7 +47,7 @@ class Base {
   //
   public static function new_from_result($attributes=[]) {
     $cls = get_called_class();
-    $record = new $cls($attributes, false);
+    $record = $cls::new($attributes, false);
     return $record;
   }
 
